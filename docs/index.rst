@@ -78,6 +78,7 @@ Contents
     documentation
     install
     quickstart
+    binder
     workflow
     method/index
     model_library/index

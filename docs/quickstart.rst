@@ -12,7 +12,11 @@ The quickstart process is summarized by the following graphic and detailed in th
     :width: 1000
     :align: center
 
-|
+
+We recognize that not every user has access to the required IT permissions on their machines to carry out the
+installation steps described below. For such users, we have made PRIMO available via a free and public service
+through Binder. This allows anyone to access, experiment with and run PRIMO from a web browser with no installation
+needed. For more details, please see: :doc:`Using PRIMO on Binder <binder>`.
 
 Step 1: Download the source code from GitHub 
 --------------------------------------------
