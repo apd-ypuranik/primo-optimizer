@@ -11,7 +11,7 @@ The steps to access PRIMO via Binder follow. Please note that:
 * The Binder environment is automatically deleted after 10 minutes of inactivity. To avoid lost work, please download your work locally on a periodic basis. 
   
 Please reach out to the NETL team (primo@netl.doe.gov) for any questions or concerns. 
-We remain committed to helping states implement MERP in any way we can.
+We remain committed to helping states implement the MERP in any way we can.
 
 Steps to use PRIMO on Binder
 ----------------------------
