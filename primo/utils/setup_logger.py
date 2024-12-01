@@ -20,8 +20,8 @@ import sys
 # User-defined libs
 from primo.utils.raise_exception import raise_exception
 
-LOGGER_FORMAT = "%(asctime)s - %(name)s:%(lineno)d - %(levelname)s - %(message)s"
-LOGGER_DATE = "%d-%b-%y %H:%M:%S"
+LOGGER_FORMAT = "%(asctime)s - %(module)s:%(lineno)d - %(levelname)s - %(message)s"
+LOGGER_DATE = "%Y-%d-%m %H:%M:%S"
 
 
 def setup_logger(
@@ -43,11 +43,6 @@ def setup_logger(
 
     log_file : pathlib.Path, default = pathlib.Path(os.devnull)
         The path on the disk where log files are written
-
-    Returns
-    -------
-    logging.Logger
-        A logger object set up as required
 
     Raises
     ------
