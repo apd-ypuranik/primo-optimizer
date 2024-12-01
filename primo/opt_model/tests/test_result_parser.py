@@ -263,7 +263,7 @@ def get_eff_metrics_accessibility_fixture():
 def test_check_column_exists(get_project):
     get_project.col_names.hospitals = None
     with pytest.raises(ValueError):
-        print(get_project.num_wells_near_hospitals)
+        _ = get_project.num_wells_near_hospitals
 
 
 # test Project Class
@@ -297,10 +297,10 @@ def test_project_attributes_minimal(get_minimal_campaign):
 
     # checking for missing attributes
     with pytest.raises(ValueError):
-        print(project.avg_dist_to_road)
+        _ = project.avg_dist_to_road
 
     with pytest.raises(ValueError):
-        print(project.avg_elevation_delta)
+        _ = project.avg_elevation_delta
 
 
 def test_max_val_col(get_project):
@@ -514,7 +514,7 @@ def test_compute_efficiency_score_edge_cases(
         for entry in dir(get_minimal_campaign.projects[1])
     )
     with pytest.raises(ValueError):
-        print(get_minimal_campaign.projects[1].avg_elevation_delta)
+        _ = get_minimal_campaign.projects[1].avg_elevation_delta
 
 
 def test_single_well(get_minimal_campaign, get_efficiency_metrics_minimal):

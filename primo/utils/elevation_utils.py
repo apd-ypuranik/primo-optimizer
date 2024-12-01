@@ -12,6 +12,7 @@
 #################################################################################
 
 # Standard libs
+import logging
 import os
 from typing import Tuple
 
@@ -26,6 +27,9 @@ from pyproj import Proj, transform
 # User-defined libs
 from primo.utils import Start_coordinates
 from primo.utils.geo_utils import get_distance
+from primo.utils.raise_exception import raise_exception
+
+LOGGER = logging.getLogger(__name__)
 
 
 def get_bing_maps_api_key() -> str:
@@ -80,8 +84,9 @@ def get_route(
     if response.status_code == 200 and data.get("resourceSets"):
         route = data["resourceSets"][0]["resources"][0]
         return route
-
-    print(f"Error: {response.status_code}, {data.get('errorDetails')}")
+    LOGGER.warning("get_route method returned a non-OK response code")
+    LOGGER.warning(f"Error: {response.status_code}, {data.get('errorDetails')}")
+    return {}
 
 
 def get_nearest_road_point(lat: float, long: float) -> Tuple[float, float]:
@@ -187,8 +192,12 @@ def get_elevation(lat: float, long: float, tif_file_path: str) -> float:
             # Read elevation data at the specified location
             elevation = src.read(1, window=((row, row + 1), (col, col + 1)))
             # Check if the value is NoData
-            if elevation[0][0] == src.nodatavals[0]:
-                return  # NoData value, elevation not available
+            if elevation[0][0] != src.nodatavals[0]:
+                raise_exception(
+                    "No elevation available for these coordinates - "
+                    f"Latitude:{lat}, Longitude:{long}",
+                    ValueError,
+                )
 
             return elevation[0][0]  # Return the elevation value
 
@@ -198,11 +207,11 @@ def get_elevation(lat: float, long: float, tif_file_path: str) -> float:
             "Latitude and longitude values are not within bounds of the region of "
             "the raster file given."
         )
-        print(msg)
-        print(
-            f"Returning None for these coordinates - Latitude:{lat}, Longitude:{long}"
+        LOGGER.warning(msg)
+        raise_exception(
+            f"No elevation available for these coordinates - Latitude:{lat}, Longitude:{long}",
+            ValueError,
         )
-        return
 
 
 def get_elevation_delta(df: pd.DataFrame, tif_file_path: str) -> pd.DataFrame:
