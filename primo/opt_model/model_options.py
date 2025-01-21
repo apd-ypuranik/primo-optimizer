@@ -155,11 +155,20 @@ def model_config() -> ConfigDict:
             doc="Maximum number of projects admissible in a campaign",
         ),
     )
+
     config.declare(
-        "max_size_project",
+        "min_wells_in_project",
         ConfigValue(
             domain=NonNegativeInt,
-            doc="Maximum number of wells admissible per project",
+            doc="Minimum number of wells required in a project",
+        ),
+    )
+
+    config.declare(
+        "max_wells_in_project",
+        ConfigValue(
+            domain=NonNegativeInt,
+            doc="Maximum number of wells allowed in a project",
         ),
     )
     config.declare(

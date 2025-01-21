@@ -106,9 +106,13 @@ def build_cluster_model(model_block, cluster):
         doc="Number of wells chosen in disadvantaged communities",
     )
 
-    # Set the maximum cost and size of the project: default is None.
+    # Set the maximum cost for a project: default is None.
     model_block.plugging_cost.setub(params.get_max_cost_project)
-    model_block.num_wells_chosen.setub(params.config.max_size_project)
+
+    # Set the minimum and maximum number of wells allowed for a project
+    # Defaults are none
+    model_block.num_wells_chosen.setlb(params.config.min_wells_in_project)
+    model_block.num_wells_chosen.setub(params.config.max_wells_in_project)
 
     # Useful expressions
     priority_score = wd["Priority Score [0-100]"]
