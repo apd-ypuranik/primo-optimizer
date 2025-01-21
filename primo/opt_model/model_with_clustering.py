@@ -111,8 +111,6 @@ def build_cluster_model(model_block, cluster):
 
     # Set the minimum and maximum number of wells allowed for a project
     # Defaults are none
-    model_block.num_wells_chosen.setlb(params.config.min_wells_in_project)
-
     if params.config.min_wells_in_project is not None:
         model_block.min_project_size = Constraint(
             expr=model_block.select_cluster * params.config.min_wells_in_project
